@@ -2,15 +2,14 @@ import LocationInfoBox from "./LocationInfoBox";
 import { useState } from "react";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Icon } from "@iconify/react";
-import locationIcon from "@iconify/icons-mdi/fire-alert";
+import LocationMarker from "./LocationMarker";
 
-const Map = ({ eventData, center, zoom }) => {
+const WholeMap = ({ eventData, center, zoom }) => {
+  console.log(eventData);
   const Map = ReactMapboxGl({
     accessToken:
-      "pk.eyJ1IjoiY3J5cHQwIiwiYSI6ImNraHQxejVpZTBweTMycmxocHMzYXBvOGIifQ.WAkWXTK2IB49tyuMYa3fFw",
+      "pk.eyJ1IjoiY3J5cHQwIiwiYSI6ImNraHQyMno3czB5ejUyc2t6dTUwdjh0bG0ifQ.wD_SXUA4mA-tIbAsUGlo3w",
   });
-
   const [locationInfo, setLocationInfo] = useState(null);
   const NATURAL_EVENT_WILDFIRE = 8;
 
@@ -24,9 +23,11 @@ const Map = ({ eventData, center, zoom }) => {
             ev.geometries[0].coordinates[0],
             ev.geometries[0].coordinates[1],
           ]}
-          onClick={() => setLocationInfo({ id: ev.id, title: ev.title })}
+          onClick={(e) => e.preventDefault()}
         >
-          <Icon icon={locationIcon} className="location-icon" />
+          <LocationMarker
+            onClick={() => setLocationInfo({ id: ev.id, title: ev.title })}
+          />
         </Marker>
       );
     }
@@ -44,13 +45,13 @@ const Map = ({ eventData, center, zoom }) => {
         zoom={[zoom]}
       >
         {markers}
-        {locationInfo && <LocationInfoBox info={locationInfo} />}
       </Map>
+      {locationInfo && <LocationInfoBox info={locationInfo} />}
     </div>
   );
 };
 
-Map.defaultProps = {
+WholeMap.defaultProps = {
   center: {
     lat: 0,
     lng: 0,
@@ -58,4 +59,4 @@ Map.defaultProps = {
   zoom: 3,
 };
 
-export default Map;
+export default WholeMap;

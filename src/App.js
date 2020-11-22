@@ -1,4 +1,4 @@
-import Map from "./components/Map";
+import WholeMap from "./components/WholeMap";
 import Loader from "./components/Loader";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <Header />
-      {!loading ? <Map eventData={eventData} /> : <Loader />};
+      {!loading ? <WholeMap eventData={eventData} /> : <Loader />};
     </div>
   );
 }
