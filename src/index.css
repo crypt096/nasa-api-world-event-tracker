@@ -21,6 +21,12 @@ body {
   margin: 0;
   text-align: center;
 }
+
+.header .icon {
+  margin-right: 10px;
+  vertical-align: text-top;
+}
+
 .map {
   width: 100vw;
   height: 100vh;
